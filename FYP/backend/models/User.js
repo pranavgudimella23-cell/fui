@@ -19,6 +19,19 @@ const userSchema = new mongoose.Schema({
     required: true,
     minlength: 6
   },
+  role: {
+    type: String,
+    enum: ['user', 'admin'],
+    default: 'user'
+  },
+  resume: {
+    name: String,
+    originalName: String,
+    size: Number,
+    mimetype: String,
+    path: String,
+    uploadedAt: Date
+  },
   createdAt: {
     type: Date,
     default: Date.now

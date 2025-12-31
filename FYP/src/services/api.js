@@ -20,6 +20,10 @@ api.interceptors.request.use((config) => {
 export const authAPI = {
   register: (data) => api.post('/auth/register', data),
   login: (data) => api.post('/auth/login', data),
+  uploadResume: (formData) => api.post('/auth/upload-resume', formData, {
+    headers: { 'Content-Type': 'multipart/form-data' },
+  }),
+  getMe: () => api.get('/auth/me'),
 };
 
 export const companyAPI = {
@@ -42,6 +46,19 @@ export const fileAPI = {
   }),
   getByTopic: (topicId) => api.get(`/files/topic/${topicId}`),
   delete: (id) => api.delete(`/files/${id}`),
+};
+
+export const assessmentAPI = {
+  create: (data) => api.post('/assessments', data),
+  getAll: () => api.get('/assessments'),
+  getAllAdmin: () => api.get('/assessments/admin/all'),
+  getById: (id) => api.get(`/assessments/${id}`),
+  update: (id, data) => api.put(`/assessments/${id}`, data),
+  delete: (id) => api.delete(`/assessments/${id}`),
+  start: (id) => api.post(`/assessments/${id}/start`),
+  submit: (id, data) => api.post(`/assessments/${id}/submit`, data),
+  getMyAttempts: () => api.get('/assessments/attempts/my-attempts'),
+  getAttempt: (id) => api.get(`/assessments/attempts/${id}`),
 };
 
 export default api;
